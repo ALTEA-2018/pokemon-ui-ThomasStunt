@@ -1,0 +1,47 @@
+{{> /header}}
+<div class="container">
+    {{#trainer}}
+    <h1 class="pt-md-5 pb-md-5">{{name}}</h1>
+
+    <div class="card-deck">
+        {{#actualTeam}}
+        <div class="col-md-3">
+            <div class="card shadow-sm mb-3">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{name}}</h4>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm">
+                        <img class="card-img-top" src="{{sprites.front_default}}" alt="PokemonFront"/>
+                    </div>
+                    <div class="col-sm">
+                        <img class="card-img-top" src="{{sprites.back_default}}" alt="PokemonFront"/>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <span class="badge badge-primary">Speed : {{stats.speed}}</span>
+                    <span class="badge badge-primary">Attack : {{stats.attack}}</span>
+                    <span class="badge badge-primary">Defense : {{stats.defense}}</span>
+                    <span class="badge badge-primary">HP : {{stats.hp}}</span>
+                    <hr>
+                    <p>Types : </p>
+                    <li class="list-group">
+                        {{#types}}
+                        <ul class="list-group-item">{{.}}</ul>
+                        {{/types}}
+                    </li>
+                </div>
+            </div>
+        </div>
+        {{/actualTeam}}
+
+    </div>
+
+    {{/trainer}}
+
+</div>
+
+</body>
+</html>
