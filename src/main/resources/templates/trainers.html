@@ -12,14 +12,16 @@
                 <div class="card-body">
                     <li class="list-group">
                         {{#actualTeam}}
-                            <ul class="list-group-item">{{name}}</ul>
+                            <ul class="list-group-item">
+                                <img class="card-img-top" src="{{sprites.front_default}}" alt="PokemonFront"/>
+                                <span class="badge badge-primary">Level {{level}}</span>
+                            </ul>
                         {{/actualTeam}}
                     </li>
                 </div>
             </div>
         </div>
         {{/trainers}}
-
     </div>
 
 </div>

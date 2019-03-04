@@ -27,18 +27,8 @@ public class TrainerController {
     public ModelAndView trainers(){
         HashMap<String, List<Trainer>> map = new HashMap<>();
         List<Trainer> trains = trainerService.listTrainers();
-        List<PokemonType> poks = pokemonService.listPokemonsTypes();
         for(Trainer t : trains) {
-            List<PokemonType> trueTeam = new ArrayList<>();
-            for(Pokemon p : t.getTeam()) {
-                for(PokemonType pT : poks) {
-                    if(p.getPokemonType() == pT.getId()) {
-                        pT.setName(pT.getName().toUpperCase());
-                        trueTeam.add(pT);
-                    }
-                }
-            }
-            t.setActualTeam(trueTeam);
+            this.setTrainerTeam(t);
         }
         trains.sort(Comparator.comparing(Trainer::getName));
         map.put("trainers", trains);
@@ -49,17 +39,7 @@ public class TrainerController {
     public ModelAndView getTrainer(@PathVariable("name") String name) {
         HashMap<String, Trainer> map = new HashMap<>();
         Trainer t = trainerService.getTrainer(name);
-        List<PokemonType> truePoks = pokemonService.listPokemonsTypes();
-        List<PokemonType> trainerTeam = new ArrayList<>();
-        for(Pokemon p : t.getTeam()) {
-            for(PokemonType pT : truePoks) {
-                if(p.getPokemonType() == pT.getId()) {
-                    pT.setName(pT.getName().toUpperCase());
-                    trainerTeam.add(pT);
-                }
-            }
-        }
-        t.setActualTeam(trainerTeam);
+        this.setTrainerTeam(t);
         map.put("trainer", t);
         return new ModelAndView("singleTrainer", map);
     }
@@ -72,6 +52,21 @@ public class TrainerController {
     @Autowired
     public void setPokemonService(PokemonTypeService service) {
         this.pokemonService = service;
+    }
+
+    private void setTrainerTeam(Trainer t) {
+        List<PokemonType> truePoks = pokemonService.listPokemonsTypes();
+        List<PokemonType> trainerTeam = new ArrayList<>();
+        for(Pokemon p : t.getTeam()) {
+            for(PokemonType pT : truePoks) {
+                if(p.getPokemonType() == pT.getId()) {
+                    pT.setName(pT.getName().toUpperCase());
+                    pT.setLevel(p.getLevel());
+                    trainerTeam.add(pT);
+                }
+            }
+        }
+        t.setActualTeam(trainerTeam);
     }
 
 }
