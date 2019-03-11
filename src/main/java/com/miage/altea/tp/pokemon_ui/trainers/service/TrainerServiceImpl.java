@@ -13,7 +13,9 @@ import java.util.List;
 @Service
 public class TrainerServiceImpl implements TrainerService {
 
+    @Autowired
     RestTemplate restTemplate;
+
     String actualUrl;
 
     public List<Trainer> listTrainers() {
