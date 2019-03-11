@@ -10,27 +10,23 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PokemonTypeController {
 
-    PokemonTypeService service;
+    private PokemonTypeService pokemonTypeService;
 
     @GetMapping("/pokedex")
     public ModelAndView pokedex(){
-        HashMap<String, List<PokemonType>> map = new HashMap<>();
-        List<PokemonType> poks = service.listPokemonsTypes();
-        poks.sort(Comparator.comparing(PokemonType::getId));
-        for(PokemonType p : poks) {
-            p.setName(p.getName().toUpperCase());
-        }
-        map.put("pokemonTypes", poks);
-        return new ModelAndView("pokedex", map);
+        Map<String, Object> stringObjectMap = new HashMap<>();
+        List<PokemonType> pokemonTypes = pokemonTypeService.listPokemonsTypes();
+        stringObjectMap.put("pokemonTypes", pokemonTypes);
+        return new ModelAndView("pokedex", stringObjectMap);
     }
 
     @Autowired
-    public void setPokemonTypeService(PokemonTypeService service) {
-        this.service = service;
+    public void setPokemonTypeService(PokemonTypeService pokemonTypeService) {
+        this.pokemonTypeService = pokemonTypeService;
     }
-
 }

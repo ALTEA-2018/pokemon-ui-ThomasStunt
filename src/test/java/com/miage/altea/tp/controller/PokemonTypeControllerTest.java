@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-class PokemonTypeControllerTest {
+public class PokemonTypeControllerTest {
     @Test
     void controllerShouldBeAnnotated(){
         assertNotNull(PokemonTypeController.class.getAnnotation(Controller.class));
@@ -42,5 +46,4 @@ class PokemonTypeControllerTest {
         assertNotNull(getMapping);
         assertArrayEquals(new String[]{"/pokedex"}, getMapping.value());
     }
-
 }

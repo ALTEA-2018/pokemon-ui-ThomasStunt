@@ -3,6 +3,7 @@ package com.miage.altea.tp.pokemon_ui.pokemonTypes.service;
 import com.miage.altea.tp.pokemon_ui.pokemonTypes.bo.PokemonType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
@@ -24,8 +25,9 @@ public class PokemonTypeServiceImpl implements PokemonTypeService {
     private String url;
 
     @Override
+    @Cacheable("pokemon-types")
     public List<PokemonType> listPokemonsTypes() {
-        PokemonType[] objects = this.restTemplate.getForObject(this.url+"/pokemon-types/", PokemonType[].class);
+        PokemonType[] objects = this.restTemplate.getForObject(this.url + "/pokemon-types/", PokemonType[].class);
 
         if (objects != null) {
             return Arrays.asList(objects);
@@ -35,8 +37,9 @@ public class PokemonTypeServiceImpl implements PokemonTypeService {
     }
 
     @Override
+    @Cacheable("pokemon-types")
     public PokemonType getPokemonByTypeId(Integer id) {
-        PokemonType pokemonType = this.restTemplate.getForObject(this.url+"/pokemon-types", PokemonType.class, id);
+        PokemonType pokemonType = this.restTemplate.getForObject(this.url + "/pokemon-types", PokemonType.class, id);
 
         if (pokemonType != null) {
             return pokemonType;
