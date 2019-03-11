@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     TrainerService trainerService;
 
+    @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
