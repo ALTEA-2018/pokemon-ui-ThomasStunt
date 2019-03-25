@@ -20,7 +20,7 @@ public class PokemonTypeServiceImpl implements PokemonTypeService {
 
     @Override
     public List<PokemonType> listPokemonsTypes() {
-        PokemonType[] objects = this.restTemplate.getForObject(this.url+"/pokemon-types/", PokemonType[].class);
+        PokemonType[] objects = this.restTemplate.getForObject(this.url, PokemonType[].class);
 
         if (objects != null) {
             return Arrays.asList(objects);
