@@ -32,7 +32,7 @@ public class PokemonTypeServiceImpl implements PokemonTypeService {
     @Override
     @Cacheable("pokemon-types")
     public PokemonType getPokemonByTypeId(Integer id) {
-        PokemonType pokemonType = this.retry.executeSupplier(() ->this.restTemplate.getForObject(this.url+"/pokemon-types", PokemonType.class, id));
+        PokemonType pokemonType = this.retry.executeSupplier(() ->this.restTemplate.getForObject(this.url, PokemonType.class, id));
 
         if (pokemonType != null) {
             return pokemonType;
@@ -51,7 +51,7 @@ public class PokemonTypeServiceImpl implements PokemonTypeService {
         this.restTemplate = restTemplate;
     }
 
-    @Value("${pokemonType.service.url}")
+    @Value("${pokemonType.service.url}/pokemon-types/")
     public void setPokemonTypeServiceUrl(String pokemonServiceUrl) {
         this.url = pokemonServiceUrl;
     }

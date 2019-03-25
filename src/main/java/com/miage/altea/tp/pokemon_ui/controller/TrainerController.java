@@ -45,18 +45,6 @@ public class TrainerController {
         return new ModelAndView("singleTrainer", map);
     }
 
-    @GetMapping("/profile")
-    public ModelAndView getProfile() {
-        HashMap<String, Trainer> map = new HashMap<>();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(principal instanceof UserDetails) {
-            Trainer t = trainerService.getTrainer(((UserDetails) principal).getUsername());
-            this.setTrainerTeam(t);
-            map.put("trainer", t);
-        }
-        return new ModelAndView("profile", map);
-    }
-
     @Autowired
     public void setTrainerService(TrainerService service) {
         this.trainerService = service;
