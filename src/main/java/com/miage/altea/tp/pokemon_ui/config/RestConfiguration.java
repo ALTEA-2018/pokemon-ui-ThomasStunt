@@ -3,7 +3,6 @@ package com.miage.altea.tp.pokemon_ui.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.support.BasicAuthenticationInterceptor;
@@ -13,22 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-@EnableAspectJAutoProxy(proxyTargetClass=true)
 public class RestConfiguration {
 
-    @Value("${trainer.service.username}")
+    @Value("${trainers.service.user.name}")
     private String username;
 
-    @Value("${trainer.service.password}")
+    @Value("${trainers.service.user.password}")
     private String password;
 
     @Bean
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
-    @Bean
-    RestTemplate trainerApiRestTemplate() {
+    RestTemplate trainerApiRestTemplate(){
         RestTemplate restTemplate = new RestTemplate();
 
         List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
@@ -42,5 +35,11 @@ public class RestConfiguration {
 
         return restTemplate;
     }
+
+    @Bean
+    RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
+
 }
 

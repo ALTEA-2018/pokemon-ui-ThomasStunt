@@ -8,9 +8,8 @@ public class Trainer {
 
     private String name;
     private String password;
-
     private List<Pokemon> team;
-    private List<PokemonType> actualTeam;
+    private List<PokemonType> teams;
 
     public Trainer() {
     }
@@ -21,6 +20,14 @@ public class Trainer {
 
     public String getName() {
         return name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setName(String name) {
@@ -35,20 +42,15 @@ public class Trainer {
         this.team = team;
     }
 
-    public List<PokemonType> getActualTeam() {
-        return actualTeam;
+    public List<PokemonType> getTeams() {
+        return teams;
     }
 
-    public void setActualTeam(List<PokemonType> actualTeam) {
-        this.actualTeam = actualTeam;
+    public void setTeams(List<PokemonType> teams) {
+        this.teams = teams;
     }
 
-    public String getPassword() {
-        return password;
+    public void addPokemonTypeToTeam(PokemonType type) {
+        this.teams.add(type);
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }
